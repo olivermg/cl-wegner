@@ -18,7 +18,10 @@
     :components ((:file "packages")
 		 (:module src
 			  :components ((:file "cl-wegner"
-					      :depends-on ()))
+					      :depends-on ())
+				       (:module curry
+						:components ((:file "curry"
+								    :depends-on ()))))
 			  :depends-on ("packages"))))
 
 (defsystem cl-wegner-tests
