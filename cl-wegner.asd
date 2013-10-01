@@ -21,6 +21,12 @@
 					      :depends-on ())
 				       (:module curry
 						:components ((:file "curry"
+								    :depends-on ())))
+				       (:module immutable
+						:components ((:file "immutable"
+								    :depends-on ())))
+				       (:module algdata
+						:components ((:file "algdata"
 								    :depends-on ()))))
 			  :depends-on ("packages"))))
 
