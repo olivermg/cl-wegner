@@ -14,20 +14,25 @@
     :author "Oliver Wegner <void1976@gmail.com"
     :license "BSD"
     :description "cl-wegner"
-    :depends-on ()
+    :depends-on (:optima)
     :components ((:file "packages")
 		 (:module src
 			  :components ((:file "cl-wegner"
 					      :depends-on ())
 				       (:module curry
-						:components ((:file "curry"
-								    :depends-on ())))
+						:components ((:file "curry"))
+						:depends-on ())
 				       (:module immutable
-						:components ((:file "immutable"
-								    :depends-on ())))
+						:components ((:file "immutable"))
+						:depends-on ())
 				       (:module algdata
-						:components ((:file "algdata"
-								    :depends-on ()))))
+						:components ((:file "algdata"))
+						:depends-on ())
+				       (:module syntax
+						:components ((:file "syntax"))
+						:depends-on ("curry"
+							     "immutable"
+							     "algdata")))
 			  :depends-on ("packages"))))
 
 (defsystem cl-wegner-tests
