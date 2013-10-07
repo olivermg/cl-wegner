@@ -14,7 +14,8 @@
     :author "Oliver Wegner <void1976@gmail.com"
     :license "BSD"
     :description "cl-wegner"
-    :depends-on (:optima)
+    :depends-on (:split-sequence
+		 :optima)
     :components ((:file "packages")
 		 (:module src
 			  :components ((:file "cl-wegner"
