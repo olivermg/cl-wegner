@@ -33,7 +33,9 @@
 						:components ((:file "syntax"))
 						:depends-on ("curry"
 							     "immutable"
-							     "algdata")))
+							     "algdata"))
+				       (:module lambda-lists
+						:components ((:file "lambda-lists"))))
 			  :depends-on ("packages"))))
 
 (defsystem cl-wegner-tests
@@ -42,5 +44,8 @@
 		 :fiveam)
     :components ((:file "packages.tests")
 		 (:module tests
-			  :components ((:file "cl-wegner"))
+			  :components ((:file "cl-wegner")
+				       (:module syntax
+						:components ((:file "syntax"))
+						:depends-on ("cl-wegner")))
 			  :depends-on ("packages.tests"))))
