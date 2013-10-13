@@ -44,7 +44,8 @@
 	 ;; TODO: we don't even need this: (fn (function/w-function fn-struct))
 	 (fn-arity (function/w-arity fn-struct)))
     (if (>= fn-args-len fn-arity)
-	`(funcall #',fn-name ,@fn-args))))
+	`(funcall #',fn-name ,@fn-args)
+	`(curry #',fn-name ,@fn-args))))
 
 (set-macro-character #\[ #'call/w)
 (set-macro-character #\] (get-macro-character #\)))
