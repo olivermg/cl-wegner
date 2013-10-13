@@ -6,7 +6,7 @@
 
 (defstruct function/w
   function
-  argcount)
+  arity)
 
 (defun funcall-or-apply (arglist)
   (if (some
@@ -24,7 +24,7 @@
 	(make-function/w
 	 :function (eval `(lambda (,@args)
 			    ,@body))
-	 :argcount (length (get-required-params args))))
+	 :arity (length (get-required-params args))))
   (let ((args-without-keywords
 	 (filter-keywords-from-params args))
 	(call-fn
@@ -33,3 +33,18 @@
        (let* ((fn-s (gethash ',name *functions*))
 	      (fn (function/w-function fn-s)))
 	 (,call-fn fn ,@args-without-keywords)))))
+
+(defun call/w (stream char)
+  (declare (ignore char))
+  (let* ((delimited-list (read-delimited-list #\] stream t))
+	 (fn-name (car delimited-list))
+	 (fn-args (cdr delimited-list))
+	 (fn-args-len (length fn-args))
+	 (fn-struct (gethash fn-name *functions*))
+	 ;; TODO: we don't even need this: (fn (function/w-function fn-struct))
+	 (fn-arity (function/w-arity fn-struct)))
+    (if (>= fn-args-len fn-arity)
+	`(funcall #',fn-name ,@fn-args))))
+
+(set-macro-character #\[ #'call/w)
+(set-macro-character #\] (get-macro-character #\)))
