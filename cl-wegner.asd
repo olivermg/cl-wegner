@@ -20,6 +20,8 @@
 		 (:module src
 			  :components ((:file "cl-wegner"
 					      :depends-on ())
+				       (:module functions
+						:components ((:file "bool-functions")))
 				       (:module curry
 						:components ((:file "curry"))
 						:depends-on ())
@@ -34,6 +36,9 @@
 						:depends-on ("curry"
 							     "immutable"
 							     "algdata"))
+				       (:module alists
+						:components ((:file "alists"))
+						:depends-on ("functions"))
 				       (:module lambda-lists
 						:components ((:file "lambda-lists"))))
 			  :depends-on ("packages"))))
