@@ -5,7 +5,7 @@
 
 
 (defun mapcar-alist (actionfn alist &key (testfn #'fn-const-true))
-  (labels ((sub-map)))
+  ;(labels ((sub-map)))
 
   (let ((hits 0))
     (values
