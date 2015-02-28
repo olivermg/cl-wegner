@@ -40,7 +40,9 @@
 						:components ((:file "alists"))
 						:depends-on ("functions"))
 				       (:module lambda-lists
-						:components ((:file "lambda-lists"))))
+						:components ((:file "lambda-lists")))
+				       (:module gensyms
+						:components ((:file "gensyms"))))
 			  :depends-on ("packages"))))
 
 (defsystem cl-wegner-tests
