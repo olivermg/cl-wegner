@@ -42,7 +42,9 @@
 				       (:module lambda-lists
 						:components ((:file "lambda-lists")))
 				       (:module gensyms
-						:components ((:file "gensyms"))))
+						:components ((:file "gensyms")))
+				       (:module destructuring
+						:components ((:file "destructuring"))))
 			  :depends-on ("packages"))))
 
 (defsystem cl-wegner-tests
