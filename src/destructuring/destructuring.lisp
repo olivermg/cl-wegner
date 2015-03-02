@@ -2,21 +2,30 @@
 
 (export '())
 
+;;;
+;;; example usage:
+;;;
+;;; (let ((vs '(33 44)))
+;;;   [d (a b) = '(11 22)
+;;;   [d (c d) = vs
+;;;   (+ a b c d)]])
+;;;
+
 (defun read-destructuring (stream char-disp char-sub)
   (declare (ignore char-disp char-sub))
-  (let ((readtable-bak (copy-readtable))
-	(d-readtable (copy-readtable nil)))
-    (setf *readtable* d-readtable)
-    (let ((one (read stream t nil t))
-	  (two (read stream t nil t))
-	  (three (read stream t nil t))
-	  (four (read stream t nil t)))
-      (setf *readtable* readtable-bak)
-      (if (not (equal '= two))
-	  (error "invalid destructuring syntax"))
-      `(destructuring-bind
-	     ,one
-	   ,three
-	 ,four))))
+  (destructuring-bind
+	(variable-list equal-sign value-list &rest body)
+      (read-delimited-list #\] stream t)
+    (if (not (equal '= equal-sign))
+	(error "invalid destructuring syntax"))
+    `(destructuring-bind
+	   ,variable-list
+	 ,value-list
+       ,@body)))
 
-(set-dispatch-macro-character #\# #\d #'read-destructuring)
+(make-dispatch-macro-character #\[)
+(set-dispatch-macro-character #\[ #\d #'read-destructuring)
+(set-macro-character #\] (get-macro-character #\)))
+
+;(set-dispatch-macro-character #\# #\d #'read-destructuring)
+
