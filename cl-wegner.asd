@@ -44,7 +44,9 @@
 				       (:module gensyms
 						:components ((:file "gensyms")))
 				       (:module destructuring
-						:components ((:file "destructuring"))))
+						:components ((:file "destructuring")))
+				       (:module symbols
+						:components ((:file "symbols"))))
 			  :depends-on ("packages"))))
 
 (defsystem cl-wegner-tests
